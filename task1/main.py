@@ -9,7 +9,7 @@ from metrics import *
 warnings.filterwarnings("ignore", category=UserWarning)
 
 image_first = cv2.imread("first_img.jpg")
-cv2.imshow('source image', image_first)
+cv2.imwrite('sourceimage.jpg', image_first)
 
 image_second = cv2.cvtColor(image_first, cv2.COLOR_BGR2GRAY)
 cv2.imshow('Gray image', image_second)
