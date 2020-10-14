@@ -1,5 +1,4 @@
 import numpy
-import cv2
 
 
 def monochrome(source_image: numpy.ndarray) -> numpy.ndarray:
@@ -18,5 +17,5 @@ def transform(source_image: numpy.ndarray) -> numpy.ndarray:
     new_image = numpy.zeros((source_image.shape[0], source_image.shape[1]))
     for i in range(0, source_image.shape[0]):
         for j in range(0, source_image.shape[1]):
-            new_image[i][j] = source_image[i][j][0];
+            new_image[i][j] = source_image[i][j][0]
     return new_image

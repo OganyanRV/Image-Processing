@@ -1,6 +1,4 @@
-import numpy
 import cv2
-import timeit
 import time
 from task2.monochrome import *
 from task1.metrics import *

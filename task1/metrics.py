@@ -1,4 +1,3 @@
-import cv2
 import numpy
 import math
 
@@ -25,10 +24,13 @@ def ssim(fi_image: numpy.ndarray, se_image: numpy.ndarray) -> float:
     contrast_se = contrast_se ** 0.5
     const_fi = 0.0003
     const_se = 0.0005
-    koef_l = (2 * intensity_fi * intensity_se + const_fi) / (intensity_fi ** 2 + intensity_se ** 2 + const_fi)
+    koef_l = (2 * intensity_fi * intensity_se + const_fi) / \
+        (intensity_fi ** 2 + intensity_se ** 2 + const_fi)
     if fi_image.shape == 2:
         covariance = numpy.cov(fi_image, se_image)  # Ковариация двух случайных величин
-        koef_c = (2 * covariance + const_se) / (contrast_fi ** 2 + contrast_se ** 2 + const_se)
+        koef_c = (2 * covariance + const_se) / \
+            (contrast_fi ** 2 + contrast_se ** 2 + const_se)
         return (koef_l/koef_c).mean()
-    koef_c = (2 * contrast_se * contrast_fi + const_se) / (contrast_fi ** 2 + contrast_se ** 2 + const_se)
+    koef_c = (2 * contrast_se * contrast_fi + const_se) / \
+        (contrast_fi ** 2 + contrast_se ** 2 + const_se)
     return koef_l * koef_c

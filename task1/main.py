@@ -12,10 +12,10 @@ cv2.imshow('source image', image_first)
 image_second = cv2.cvtColor(image_first, cv2.COLOR_BGR2GRAY)
 cv2.imshow('Gray image', image_second)
 
-noise_img_fi = random_noise(image_first, mode='s&p', amount=0.1)
+noise_img_fi = random_noise(image_first, mode='s&p', amount=0.1)  # Добавление шума
 cv2.imshow('noised source image', noise_img_fi)
 
-noise_img_se = random_noise(image_second, mode='s&p', amount=0.1)
+noise_img_se = random_noise(image_second, mode='s&p', amount=0.1)  # Добавление шума
 cv2.imshow('noised gray  image', noise_img_se)
 cv2.waitKey(0)
 
@@ -40,7 +40,7 @@ print(psnr(image_first, noise_img_fi), end="\n")
 print("PSNR серого: ", end="\n")
 print(psnr(image_second, noise_img_se), end="\n")
 
-print("SSIM цветных: ",end="\n")
+print("SSIM цветных: ", end="\n")
 print("Мой SSIM: ", end="\n")
 print('{:.10f}'.format(ssim(image_first, noise_img_fi)), end="\n")
 
@@ -53,5 +53,3 @@ print('{:.10f}'.format(ssim(image_second, noise_img_se)), end="\n")
 
 print("structural_similarity: ", end="\n")
 print(structural_similarity(image_second, noise_img_se, multichannel=True), end="\n")
-
-
