@@ -1,36 +1,35 @@
-# from matplotlib import pyplot as plt
 import cv2 as cv
 import numpy as np
 from task31.convert_to_hsv_lib import convert_to_hsv
 from task1.metrics import psnr
-import timeit
+from utils.utils import measure_time
+
 
 def main():
-    img = cv.imread('Small.jpg', cv.IMREAD_COLOR)
+    # Загружаем изображение из памяти
+    img = cv.imread('house.jpeg', cv.IMREAD_COLOR)
 
-    # cv.imshow("Original", cv.cvtColor(img, cv.COLOR_BGR2RGB))
-    # cv.waitKey(0)
-    # cv.destroyAllWindows()
+    # Запускаем таймер и производим конвертацию нашей реализацией
+    our_time, converted = measure_time(convert_to_hsv, img)
 
-    print(psnr(img, img))
+    converted = np.array(converted)
 
-    converted: np.array = convert_to_hsv(img)
-    built_in = cv.cvtColor(img, cv.COLOR_BGR2HSV)
+    print('Время работы нашей реализации: {0} с'.format(our_time))
 
-    threshold = 0
+    # Запускаем таймер и производим конверацию встроенной функцией
+    built_in_time, built_in = measure_time(cv.cvtColor, img, cv.COLOR_BGR2HSV)
 
-    print(np.allclose(converted, built_in, threshold))
+    print('Время работы библиотечной реализации: {0} с'.format(built_in_time))
 
-    # res = converted - built_in
-    # cv.imshow("Converted", cv.cvtColor(converted, cv.COLOR_HSV2RGB))
-    # cv.waitKey(0)
-    # cv.destroyAllWindows()
+    print('Метрика PSNR: {0}'.format(psnr(converted, built_in)))
 
+    # Преобразум тип в int16, чтобы посчитать максимальную разницу в значениях
+    converted = converted.astype(np.int16, copy=False)
+    built_in = built_in.astype(np.int16, copy=False)
 
+    # Вычисляем наибольшую разницу
+    print('Максимальная разница в значениях: {0}'.format(np.amax(np.absolute(converted - built_in))))
 
-    print(psnr(converted, img))
-
-    print("Время работы нашей реализации: ")
 
 if __name__ == '__main__':
     main()
