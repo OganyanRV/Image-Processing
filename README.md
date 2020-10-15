@@ -1,3 +1,3 @@
-# image-processing
+# Лабораторная работа №1
 
-Here we'll be doing labs on NNSU's Image Processing course.
+Выполнена **Оганян Робертом**, **Дмитрием Трониным**, **Игорем Руховичем**, студентами группы **381808-1**.
